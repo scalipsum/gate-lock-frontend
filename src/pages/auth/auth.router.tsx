@@ -1,14 +1,12 @@
-import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
-import EmailPage from './pages/auth/email/email.page';
-import { RouterProvider } from 'react-router-dom';
-import ErrorPage from './pages/error.page';
-import MessagePage from './pages/auth/message/message.page';
-import CreateAccountPage from './pages/auth/createAccount/createAccount.page';
+import ErrorPage from '../error.page';
+import CreateAccountPage from './createAccount/createAccount.page';
+import EmailPage from './email/email.page';
+import MessagePage from './message/message.page';
 
-const authRouter = createBrowserRouter([
+export const authRouter = createBrowserRouter([
 	{
-		path: '/',
+		path: '/auth/login',
 		element: <EmailPage />,
 		errorElement: <ErrorPage />,
 	},
@@ -35,14 +33,3 @@ const authRouter = createBrowserRouter([
 		element: <CreateAccountPage />,
 	},
 ]);
-
-function Routes() {
-	return (
-		// App Container
-		<div className="bg-gray1 h-screen">
-			<RouterProvider router={authRouter} />
-		</div>
-	);
-}
-
-export default Routes;
