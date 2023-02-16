@@ -1,0 +1,59 @@
+/* Reset */
+@import 'reset.css';
+
+/* Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
+
+html {
+	font-size: 16px;
+}
+
+/* Typography */
+h1 {
+	font-family: 'Lato', sans-serif;
+	font-weight: 900;
+	font-size: 4rem;
+	letter-spacing: -1px;
+}
+
+h2 {
+	font-family: 'Lato', sans-serif;
+	font-weight: 900;
+	font-size: 2.5rem;
+	letter-spacing: -0.75px;
+}
+
+h3 {
+	font-family: 'Lato', sans-serif;
+	font-weight: 900;
+	font-size: 1.5rem;
+	letter-spacing: -0.25px;
+}
+
+p {
+	font-family: 'Lato', sans-serif;
+	font-weight: 400;
+	font-size: 1rem;
+	letter-spacing: 0;
+	line-height: 150%;
+}
+
+strong {
+	font-weight: 700;
+}
+
+small {
+	font-size: 0.875rem;
+}
+
+button {
+	font-family: 'Lato', sans-serif;
+	font-weight: 700;
+	text-transform: uppercase;
+	font-size: 0.875rem;
+}
