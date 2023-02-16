@@ -10,7 +10,14 @@
 @tailwind utilities;
 
 html {
+	box-sizing: border-box;
 	font-size: 16px;
+	color: #252525; /* Tailwind black */
+}
+html,
+body {
+	height: 100%;
+	width: 100%;
 }
 
 /* Typography */

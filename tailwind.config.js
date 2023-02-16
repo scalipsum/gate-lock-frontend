@@ -26,6 +26,9 @@ module.exports = {
 			'4xl': '2.5rem',
 			'6xl': '4rem',
 		},
+		maxWidth: {
+			container: '1120px',
+		},
 		extend: {},
 	},
 	variants: {
