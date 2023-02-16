@@ -1,13 +1,13 @@
 /* Reset */
 @import 'reset.css';
 
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
+
 /* Tailwind */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
 
 html {
 	font-size: 16px;

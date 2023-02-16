@@ -19,6 +19,13 @@ module.exports = {
 		fontFamily: {
 			sans: ['Lato', 'sans-serif'],
 		},
+		fontSize: {
+			sm: '0.875rem',
+			base: '1rem',
+			xl: '1.5rem',
+			'4xl': '2.5rem',
+			'6xl': '4rem',
+		},
 		extend: {},
 	},
 	variants: {
