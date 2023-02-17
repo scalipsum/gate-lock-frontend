@@ -8,13 +8,15 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 	name: string;
 	label?: string;
 	infoText?: string;
-	error?: string;
+	error?: string | any;
 	disabled?: boolean;
 	icon?: JSX.Element;
 	// Styling
 	containerClassName?: string;
 	className?: string;
 	activeColor?: string;
+	// Form
+	register: any;
 }
 
 const Input: FC<InputProps> = ({
@@ -29,9 +31,11 @@ const Input: FC<InputProps> = ({
 	className,
 	containerClassName,
 	activeColor,
+	// Form
+	register,
 	...props
 }) => {
-	const [, setValue] = useState<string>();
+	const [value, setValue] = useState<string>();
 	const [active, setActive] = useState<boolean>(false);
 
 	// Colors
@@ -81,8 +85,10 @@ const Input: FC<InputProps> = ({
 					className={`py-4 ${inputPaddingLeft} pr-4 rounded-lg w-full border ${borderColor} ${textColor} placeholder:text-gray4 text-lg ${backgroundColor}`}
 					onFocus={() => setActive(true)}
 					onBlur={() => setActive(false)}
+					value={value}
 					onChange={(e) => setValue(e.target.value)}
 					disabled={disabled}
+					{...register(name)}
 					{...props}
 				/>
 			</div>
