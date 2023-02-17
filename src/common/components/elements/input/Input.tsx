@@ -1,4 +1,4 @@
-import React, { FC, InputHTMLAttributes, useEffect, useState } from 'react';
+import React, { FC, InputHTMLAttributes, useState } from 'react';
 import OptionalWrapper from '../wrapper/OptionalWrapper';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -7,6 +7,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 	label?: string;
 	infoText?: string;
 	error?: string;
+	disabled?: boolean;
 	// Styling
 	containerClassName?: string;
 	className?: string;
@@ -19,6 +20,7 @@ const Input: FC<InputProps> = ({
 	label,
 	infoText,
 	error,
+	disabled,
 	// Styling
 	className,
 	containerClassName,
@@ -32,6 +34,8 @@ const Input: FC<InputProps> = ({
 		? `bg-${error ? 'red' : activeColor ?? 'blue'}`
 		: `bg-${error ? 'red' : 'gray3'}`;
 	const borderColor = `border-${error ? 'red' : 'gray2'}`;
+	const backgroundColor = `bg-${disabled ? 'gray2' : 'white'}`;
+	const textColor = `text-${disabled ? 'gray4' : 'black'}`;
 
 	return (
 		<div className={`w-full ${containerClassName}`}>
@@ -49,10 +53,12 @@ const Input: FC<InputProps> = ({
 				<input
 					id={name}
 					name={name}
-					className={`py-4 pl-9 pr-4 rounded-lg w-full border ${borderColor} text-black placeholder:text-gray4 text-lg`}
+					className={`py-4 pl-9 pr-4 rounded-lg w-full border ${borderColor} ${textColor} placeholder:text-gray4 text-lg ${backgroundColor}`}
 					onFocus={() => setActive(true)}
 					onBlur={() => setActive(false)}
 					onChange={(e) => setValue(e.target.value)}
+					disabled={disabled}
+					value="hello@vladb.uk"
 					{...props}
 				/>
 			</div>
