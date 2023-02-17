@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import SymbolLogo from '../../../assets/svg/gl-logo-symbol.svg';
 import TextLogo from '../../../assets/svg/gl-logo-text.svg';
 import Input from '../../../common/components/elements/input/Input';
+import { AiTwotoneMail } from 'react-icons/ai';
 
 const LoginPage: FC = () => {
 	return (
@@ -16,7 +17,8 @@ const LoginPage: FC = () => {
 					label="Email"
 					// infoText="Valid emails only."
 					// error="Invalid email."
-					disabled={true}
+					// disabled={true}
+					icon={<AiTwotoneMail />}
 				/>
 			</div>
 			{/* Button */}
