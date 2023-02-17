@@ -30,6 +30,7 @@ const Input: FC<InputProps> = ({
 	const [, setValue] = useState<string>();
 	const [active, setActive] = useState<boolean>(false);
 
+	// Colors
 	const color = active
 		? `bg-${error ? 'red' : activeColor ?? 'blue'}`
 		: `bg-${error ? 'red' : 'gray3'}`;
@@ -58,7 +59,6 @@ const Input: FC<InputProps> = ({
 					onBlur={() => setActive(false)}
 					onChange={(e) => setValue(e.target.value)}
 					disabled={disabled}
-					value="hello@vladb.uk"
 					{...props}
 				/>
 			</div>
