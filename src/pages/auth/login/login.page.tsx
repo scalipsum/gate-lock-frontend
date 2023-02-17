@@ -14,6 +14,8 @@ const LoginPage: FC = () => {
 					placeholder="Enter your email..."
 					containerClassName="mt-16"
 					label="Email"
+					infoText="Valid emails only."
+					error="Invalid email."
 				/>
 			</div>
 			{/* Button */}
