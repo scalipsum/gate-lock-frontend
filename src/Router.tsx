@@ -1,5 +1,6 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import AuthContainer from './pages/auth/auth.container';
 import CreateAccountPage from './pages/auth/createAccount/createAccount.page';
 import LoginPage from './pages/auth/login/login.page';
 import MessagePage from './pages/auth/message/message.page';
@@ -17,29 +18,41 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				path: 'login',
-				element: <LoginPage />,
+				element: (
+					<AuthContainer>
+						<LoginPage />
+					</AuthContainer>
+				),
 			},
 			{
 				path: 'email-sent',
 				element: (
-					<MessagePage
-						title="Email sent for approval."
-						description="You'll receive an email to log in once an Admin has accepted you."
-					/>
+					<AuthContainer>
+						<MessagePage
+							title="Email sent for approval."
+							description="You'll receive an email to log in once an Admin has accepted you."
+						/>
+					</AuthContainer>
 				),
 			},
 			{
 				path: 'not-approved',
 				element: (
-					<MessagePage
-						title="Not approved yet."
-						description="Please come back later."
-					/>
+					<AuthContainer>
+						<MessagePage
+							title="Not approved yet."
+							description="Please come back later."
+						/>
+					</AuthContainer>
 				),
 			},
 			{
 				path: 'create-account',
-				element: <CreateAccountPage />,
+				element: (
+					<AuthContainer>
+						<CreateAccountPage />,
+					</AuthContainer>
+				),
 			},
 		],
 	},

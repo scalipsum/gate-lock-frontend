@@ -65,3 +65,42 @@ button {
 	font-size: 0.875rem;
 	letter-spacing: 0.75px;
 }
+
+/* Waves */
+.wave {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	width: 100vw;
+	height: calc(100vw + 100px);
+	margin-top: calc(-100vw);
+	border-radius: 55%;
+	background: #1f5577;
+}
+
+@keyframes rotate {
+	from {
+		transform: rotate(0deg);
+	}
+	from {
+		transform: rotate(360deg);
+	}
+}
+
+.wave.-top {
+	animation: rotate 6000ms infinite linear;
+	margin-left: -1200;
+	opacity: 0.8;
+}
+.wave.-mid {
+	animation: rotate 9000ms infinite linear;
+	opacity: 0.7;
+	opacity: 0.5;
+}
+.wave.-bottom {
+	animation: rotate 12000ms infinite linear;
+	margin-left: -1200;
+	opacity: 0.7;
+}

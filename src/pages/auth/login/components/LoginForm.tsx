@@ -24,11 +24,10 @@ const LoginForm = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(handleSaveData)} className="w-full">
+		<form onSubmit={handleSubmit(handleSaveData)} className="w-full mt-16">
 			<Input
 				name="email"
 				placeholder="Enter your email..."
-				containerClassName="mt-16"
 				icon={<AiTwotoneMail />}
 				register={register}
 				error={errors.email?.message}
