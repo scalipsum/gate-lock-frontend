@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import AuthContainer from './pages/auth/auth.container';
 import CreateAccountPage from './pages/auth/createAccount/createAccount.page';
@@ -58,12 +58,8 @@ export const router = createBrowserRouter([
 	},
 ]);
 
-function Router() {
-	return (
-		<div className="bg-gray1">
-			<RouterProvider router={router} />
-		</div>
-	);
-}
+const Router: FC = () => {
+	return <RouterProvider router={router} />;
+};
 
 export default Router;

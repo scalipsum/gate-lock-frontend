@@ -90,7 +90,7 @@ button {
 }
 
 .wave.-top {
-	animation: rotate 6000ms infinite linear;
+	animation: rotate 7000ms infinite linear;
 	margin-left: -1200;
 	opacity: 0.8;
 }
