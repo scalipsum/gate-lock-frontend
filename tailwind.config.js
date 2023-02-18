@@ -29,7 +29,11 @@ module.exports = {
 		maxWidth: {
 			container: '1120px',
 		},
-		extend: {},
+		extend: {
+			spacing: {
+				128: '32rem',
+			},
+		},
 	},
 	variants: {
 		extend: {},

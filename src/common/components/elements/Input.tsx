@@ -1,7 +1,7 @@
 import React, { FC, InputHTMLAttributes, useState } from 'react';
-import OptionalWrapper from '../wrapper/OptionalWrapper';
+import OptionalWrapper from './wrapper/OptionalWrapper';
 import { IconContext } from 'react-icons';
-import { colors } from '../../../styles/colors';
+import { colors } from '../../styles/colors';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 	// Functional
