@@ -1,12 +1,9 @@
 import React, { FC } from 'react';
 import Router from './Router';
 import { createClient, Provider } from 'urql';
-import { useQuery } from 'urql';
 
 const App: FC = () => {
-	const client = createClient({
-		url: 'http://localhost:4000/graphql',
-	});
+	const client = createClient({ url: process.env.REACT_APP_API_URL ?? '' });
 
 	return (
 		<div className="bg-gray1">
