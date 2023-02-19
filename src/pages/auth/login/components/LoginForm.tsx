@@ -28,7 +28,6 @@ const LoginForm = () => {
 	} = useForm<LoginFormData>({ resolver: yupResolver(loginFormSchema) });
 
 	const [currentUser, setCurrentUser] = useState<MeQuery>();
-	const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
 	const [, loginUser] = useLoginUserMutation();
 	const [{ data }, refetch] = useMeQuery();
@@ -41,7 +40,6 @@ const LoginForm = () => {
 			password: 'test',
 		});
 		if (userData?.login?.email) {
-			setLoggedIn(true);
 			console.log('Logged In.');
 			console.log(userData.login.name);
 		}
@@ -50,15 +48,18 @@ const LoginForm = () => {
 
 	const handleGetCurrentUser = async () => {
 		console.log('User fetching...');
-		const response = await refetch({ requestPolicy: 'network-only' });
-		console.log(response);
+		await refetch({ requestPolicy: 'network-only' });
+		setCurrentUser(data);
 		console.log(data);
 	};
 
 	const handleLogout = async () => {
 		console.log('Logging user out...');
 		const { data } = await logoutUser({});
-		if (data?.logout) console.log('Logged out.');
+		if (data?.logout) {
+			console.log('Logged out.');
+			setCurrentUser(undefined);
+		}
 	};
 
 	const me = currentUser?.me;
@@ -73,25 +74,31 @@ const LoginForm = () => {
 					register={register}
 					error={errors.email?.message}
 				/>
-				<Button
-					type="submit"
-					containerClassName="mt-12 text-center"
-					disabled={loggedIn}
-				>
-					Hard Login
+				<Button type="submit" containerClassName="mt-12 text-center">
+					Submit
 				</Button>
 			</form>
-			<Button type="button" onClick={handleGetCurrentUser} className="mt-4">
-				Get Me
-			</Button>
-			<OptionalWrapper data={me}>
-				<p>Logged in user:</p>
-				<p>{me?.name}</p>
-				<p>{me?.email}</p>
-			</OptionalWrapper>
-			<Button type="button" onClick={handleLogout} className="mt-4">
-				Logout
-			</Button>
+			<div className="flex">
+				{/* @ts-ignore */}
+				<Button type="button" onClick={handleLogIn} className="mt-4 mr-4">
+					Log in
+				</Button>
+				<Button
+					type="button"
+					onClick={handleGetCurrentUser}
+					className="mt-4 mr-4"
+				>
+					Get Me
+				</Button>
+				<OptionalWrapper data={me?.email}>
+					<p>Logged in user:</p>
+					<p>{me?.name}</p>
+					<p>{me?.email}</p>
+				</OptionalWrapper>
+				<Button type="button" onClick={handleLogout} className="mt-4">
+					Logout
+				</Button>
+			</div>
 		</>
 	);
 };
