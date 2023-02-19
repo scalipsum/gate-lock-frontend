@@ -4,11 +4,11 @@ import {
 	Navigate,
 	RouterProvider,
 } from 'react-router-dom';
-import AuthContainer from './pages/auth/auth.container';
 import CreateAccountPage from './pages/auth/createAccount/createAccount.page';
 import LoginPage from './pages/auth/login/login.page';
 import MessagePage from './pages/auth/message/message.page';
 import ErrorPage from './pages/error.page';
+import HomePage from './pages/main/home/home.page';
 
 type RouterProps = {
 	isLoggedIn: boolean;
@@ -21,7 +21,7 @@ const Router: FC<RouterProps> = ({ isLoggedIn }) => {
 	const router = createBrowserRouter([
 		{
 			path: '/',
-			element: isLoggedIn ? <h1>Hello</h1> : redirectAuth(),
+			element: isLoggedIn ? <HomePage /> : redirectAuth(),
 			errorElement: isLoggedIn ? <ErrorPage /> : redirectAuth(),
 		},
 		// Auth

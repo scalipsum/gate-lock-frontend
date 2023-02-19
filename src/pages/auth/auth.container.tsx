@@ -12,6 +12,7 @@ const AuthContainer: FC<AuthContainerProps> = ({ children }) => {
 			<div className="wave -mid"></div>
 			<div className="wave -bottom"></div>
 
+			{/* Content */}
 			{children}
 
 			{/* Copyright */}
