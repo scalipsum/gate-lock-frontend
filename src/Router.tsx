@@ -31,41 +31,29 @@ const Router: FC<RouterProps> = ({ isLoggedIn }) => {
 			children: [
 				{
 					path: 'login',
-					element: (
-						<AuthContainer>
-							<LoginPage />
-						</AuthContainer>
-					),
+					element: <LoginPage />,
 				},
 				{
 					path: 'email-sent',
 					element: (
-						<AuthContainer>
-							<MessagePage
-								title="Email sent for approval."
-								description="You'll receive an email to log in once an Admin has accepted you."
-							/>
-						</AuthContainer>
+						<MessagePage
+							title="Email sent for approval."
+							description="You'll receive an email to log in once an Admin has accepted you."
+						/>
 					),
 				},
 				{
 					path: 'account-sent',
 					element: (
-						<AuthContainer>
-							<MessagePage
-								title="Not approved by an admin yet."
-								description="Please come back later."
-							/>
-						</AuthContainer>
+						<MessagePage
+							title="Not approved by an admin yet."
+							description="Please come back later."
+						/>
 					),
 				},
 				{
 					path: 'create-account',
-					element: (
-						<AuthContainer>
-							<CreateAccountPage />,
-						</AuthContainer>
-					),
+					element: <CreateAccountPage />,
 				},
 			],
 		},

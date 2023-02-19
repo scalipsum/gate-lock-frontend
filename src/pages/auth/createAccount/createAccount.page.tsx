@@ -1,10 +1,13 @@
 import React, { FC } from 'react';
+import AuthContainer from '../auth.container';
 
 const CreateAccountPage: FC = () => {
 	return (
-		<div>
-			<h1>Create Account Page</h1>
-		</div>
+		<AuthContainer>
+			<div>
+				<h1>Create Account Page</h1>
+			</div>
+		</AuthContainer>
 	);
 };
 
