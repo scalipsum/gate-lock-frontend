@@ -1,0 +1,3 @@
+mutation CheckUserStatus($email: String!) {
+	checkUserStatus(input: { email: $email })
+}
