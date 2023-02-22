@@ -16,7 +16,7 @@ const LoginPage: FC = () => {
 			<div className="flex flex-col items-center mb-40 w-128">
 				<img src={SymbolLogo} alt="Gate Lock Logo" className="w-80" />
 				<img src={TextLogo} alt="Gate Lock Logo Text " className="mt-6 w-80" />
-				{userStatus === UserStatus.Approved ? (
+				{userStatus === UserStatus.Active ? (
 					<LoginForm defaultEmail={email} />
 				) : (
 					<UserStatusForm setUserStatus={setUserStatus} setEmail={setEmail} />

@@ -9,6 +9,7 @@ import {
 	useCheckUserStatusMutation,
 	UserStatus,
 } from '../../../../generated/graphql';
+import { useNavigate } from 'react-router-dom';
 
 type UserStatusFormProps = {
 	setUserStatus: Dispatch<SetStateAction<UserStatus | undefined>>;
@@ -26,6 +27,7 @@ const UserStatusForm: FC<UserStatusFormProps> = ({
 }) => {
 	const [loading, setLoading] = useState(false);
 	const [, getUserStatus] = useCheckUserStatusMutation();
+	const navigate = useNavigate();
 
 	/**
 	 * Form Submit
@@ -35,8 +37,21 @@ const UserStatusForm: FC<UserStatusFormProps> = ({
 		const { data: statusData } = await getUserStatus({
 			email: data.email,
 		});
+
 		setUserStatus(statusData?.checkUserStatus);
 		setLoading(false);
+		console.log(statusData?.checkUserStatus);
+
+		switch (statusData?.checkUserStatus) {
+			case UserStatus.NotConfirmed:
+				return navigate('/auth/email-sent');
+			case UserStatus.NotApproved:
+				return navigate('/auth/account-sent');
+			case UserStatus.Approved:
+				return navigate('/auth/create-account');
+			default:
+				return;
+		}
 	};
 
 	/**
