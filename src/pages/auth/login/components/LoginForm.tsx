@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { InferType, object, string } from 'yup';
 import Input from '../../../../common/components/elements/Input';
@@ -22,17 +22,20 @@ type LoginData = InferType<typeof loginSchema>;
 const LoginForm: FC<LoginFormProps> = ({ defaultEmail }) => {
 	const { setIsLoggedIn } = useAuthContext();
 	const [, loginUser] = useLoginUserMutation();
+	const [loading, setLoading] = useState<boolean>(false);
 
 	/**
 	 * Form Submit
 	 */
 	const onSubmit = async (data: LoginData) => {
+		setLoading(true);
 		const { data: loginData, error: loginError } = await loginUser(data);
 		if (loginData?.login?.email) {
 			setIsLoggedIn(true);
 			showSuccess('Logged in.');
 		}
 		if (loginError) showError(loginError.message);
+		setLoading(false);
 	};
 
 	/**
@@ -49,7 +52,10 @@ const LoginForm: FC<LoginFormProps> = ({ defaultEmail }) => {
 	});
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className="w-full mt-16">
+		<form
+			onSubmit={handleSubmit(onSubmit)}
+			className="w-full mt-16 flex flex-col"
+		>
 			<Input
 				name="email"
 				type="email"
@@ -69,7 +75,11 @@ const LoginForm: FC<LoginFormProps> = ({ defaultEmail }) => {
 				containerClassName="mt-4"
 				autoFocus
 			/>
-			<Button type="submit" containerClassName="mt-12 text-center">
+			<Button
+				type="submit"
+				containerClassName="mt-12 self-center"
+				loading={loading}
+			>
 				Login
 			</Button>
 		</form>

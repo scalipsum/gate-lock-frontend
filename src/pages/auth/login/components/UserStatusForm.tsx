@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction } from 'react';
+import React, { Dispatch, FC, SetStateAction, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { InferType, object, string } from 'yup';
 import Input from '../../../../common/components/elements/Input';
@@ -24,6 +24,7 @@ const UserStatusForm: FC<UserStatusFormProps> = ({
 	setUserStatus,
 	setEmail,
 }) => {
+	const [loading, setLoading] = useState(false);
 	const [, getUserStatus] = useCheckUserStatusMutation();
 
 	/**
@@ -35,6 +36,7 @@ const UserStatusForm: FC<UserStatusFormProps> = ({
 			email: data.email,
 		});
 		setUserStatus(statusData?.checkUserStatus);
+		setLoading(false);
 	};
 
 	/**
@@ -49,7 +51,10 @@ const UserStatusForm: FC<UserStatusFormProps> = ({
 
 	return (
 		<>
-			<form onSubmit={handleSubmit(onSubmit)} className="w-full mt-16">
+			<form
+				onSubmit={handleSubmit(onSubmit)}
+				className="w-full mt-16 flex flex-col"
+			>
 				<Input
 					name="email"
 					placeholder="Enter your email..."
@@ -57,7 +62,12 @@ const UserStatusForm: FC<UserStatusFormProps> = ({
 					register={register}
 					error={errors.email?.message}
 				/>
-				<Button type="submit" containerClassName="mt-12 text-center">
+				<Button
+					type="submit"
+					containerClassName="mt-12 self-center"
+					onClick={() => setLoading(true)}
+					loading={loading}
+				>
 					Submit
 				</Button>
 			</form>
