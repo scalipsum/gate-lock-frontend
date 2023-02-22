@@ -1,10 +1,16 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 
 type AuthWrapperProps = {
 	children: React.ReactNode;
+	title: string;
 };
 
-const AuthWrapper: FC<AuthWrapperProps> = ({ children }) => {
+const AuthWrapper: FC<AuthWrapperProps> = ({ children, title }) => {
+	// Set Page Title
+	useEffect(() => {
+		document.title = `${title} | Gate Lock`;
+	}, [title]);
+
 	return (
 		<div className="h-screen w-full relative overflow-hidden">
 			{/* Waves */}

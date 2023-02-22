@@ -23,7 +23,7 @@ const Router: FC = () => {
 		{
 			path: '/',
 			element: isLoggedIn ? (
-				<MainWrapper>
+				<MainWrapper title="Main">
 					<HomePage />
 				</MainWrapper>
 			) : (
@@ -39,7 +39,7 @@ const Router: FC = () => {
 				{
 					path: 'login',
 					element: (
-						<AuthWrapper>
+						<AuthWrapper title="Login">
 							<LoginPage />
 						</AuthWrapper>
 					),
@@ -47,7 +47,7 @@ const Router: FC = () => {
 				{
 					path: 'email-sent',
 					element: (
-						<AuthWrapper>
+						<AuthWrapper title="Email Sent">
 							<MessagePage
 								title="Email sent for approval."
 								description="You'll receive an email to log in once an Admin has accepted you."
@@ -58,7 +58,7 @@ const Router: FC = () => {
 				{
 					path: 'account-sent',
 					element: (
-						<AuthWrapper>
+						<AuthWrapper title="Not approved">
 							<MessagePage
 								title="Not approved by an admin yet."
 								description="Please come back later."
@@ -69,7 +69,7 @@ const Router: FC = () => {
 				{
 					path: 'create-account',
 					element: (
-						<AuthWrapper>
+						<AuthWrapper title="Create account">
 							<CreateAccountPage />
 						</AuthWrapper>
 					),
