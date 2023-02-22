@@ -9,7 +9,7 @@ import AuthWrapper from './pages/auth/auth.wrapper';
 import CreateAccountPage from './pages/auth/createAccount/createAccount.page';
 import LoginPage from './pages/auth/login/login.page';
 import MessagePage from './pages/auth/message/message.page';
-import ErrorPage from './pages/error.page';
+import ErrorPage from './pages/main/error/error.page';
 import HomePage from './pages/main/home/home.page';
 import MainWrapper from './pages/main/main.wrapper';
 

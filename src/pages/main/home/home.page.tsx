@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import Button from '../../../common/components/elements/Button';
+import { showError, showSuccess } from '../../../common/helpers/showToast';
 import { useLogoutMutation } from '../../../generated/graphql';
 import { useAuthContext } from '../../auth/auth.provider';
 
@@ -12,8 +13,10 @@ const HomePage: FC = () => {
 
 	const handleLogout = async () => {
 		const { data, error } = await logout({});
-		if (data?.logout) return setIsLoggedIn(false);
-		else return console.log(error);
+		if (data?.logout) {
+			showSuccess('Logged out.');
+			return setIsLoggedIn(false);
+		} else showError(error?.message);
 	};
 
 	return (

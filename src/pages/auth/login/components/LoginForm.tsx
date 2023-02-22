@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import Button from '../../../../common/components/elements/Button';
 import { useAuthContext } from '../../auth.provider';
 import { useLoginUserMutation } from '../../../../generated/graphql';
+import { showError, showSuccess } from '../../../../common/helpers/showToast';
 
 type LoginFormProps = {
 	defaultEmail: string;
@@ -27,8 +28,11 @@ const LoginForm: FC<LoginFormProps> = ({ defaultEmail }) => {
 	 */
 	const onSubmit = async (data: LoginData) => {
 		const { data: loginData, error: loginError } = await loginUser(data);
-		if (loginData?.login?.email) return setIsLoggedIn(true);
-		if (loginError) return console.log(loginError);
+		if (loginData?.login?.email) {
+			setIsLoggedIn(true);
+			showSuccess('Logged in.');
+		}
+		if (loginError) showError(loginError.message);
 	};
 
 	/**
