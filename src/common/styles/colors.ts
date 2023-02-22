@@ -1,3 +1,8 @@
+/**
+ * TO BE UPDATED BASED ON
+ * tailwind.config.js
+ */
+
 export const colors = {
 	blue: '#256D8E',
 	darkBlue: '#1F5577',

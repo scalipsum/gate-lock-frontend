@@ -1,105 +1,74 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { InferType, object, string } from 'yup';
 import Input from '../../../../common/components/elements/Input';
-import { AiTwotoneMail } from 'react-icons/ai';
+import { AiFillLock, AiTwotoneMail } from 'react-icons/ai';
 import { useForm } from 'react-hook-form';
 import Button from '../../../../common/components/elements/Button';
-import {
-	MeQuery,
-	useLoginUserMutation,
-	useLogoutMutation,
-	useMeQuery,
-	User,
-} from '../../../../generated/graphql';
-import OptionalWrapper from '../../../../common/components/elements/wrapper/OptionalWrapper';
+import { useAuthContext } from '../../auth.provider';
+import { useLoginUserMutation } from '../../../../generated/graphql';
 
-const loginFormSchema = object({
+type LoginFormProps = {
+	defaultEmail: string;
+};
+
+const loginSchema = object({
 	email: string().email('Email must be valid.').required('Email is required.'),
+	password: string().required('Password is required.'),
 });
-type LoginFormData = InferType<typeof loginFormSchema>;
+type LoginData = InferType<typeof loginSchema>;
 
-const LoginForm = () => {
+const LoginForm: FC<LoginFormProps> = ({ defaultEmail }) => {
+	const { setIsLoggedIn } = useAuthContext();
+	const [, loginUser] = useLoginUserMutation();
+
+	/**
+	 * Form Submit
+	 */
+	const onSubmit = async (data: LoginData) => {
+		const { data: loginData, error: loginError } = await loginUser(data);
+		if (loginData?.login?.email) return setIsLoggedIn(true);
+		if (loginError) return console.log(loginError);
+	};
+
+	/**
+	 * Form Controller
+	 */
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
+	} = useForm<LoginData>({
 		// @ts-ignore
-	} = useForm<LoginFormData>({ resolver: yupResolver(loginFormSchema) });
-
-	const [currentUser, setCurrentUser] = useState<MeQuery>();
-
-	const [, loginUser] = useLoginUserMutation();
-	const [{ data }, refetch] = useMeQuery();
-	const [, logoutUser] = useLogoutMutation();
-
-	const handleLogIn = async (data: LoginFormData) => {
-		console.log('Logging user in...');
-		const { data: userData, error } = await loginUser({
-			email: 'test3@test.com',
-			password: 'test',
-		});
-		if (userData?.login?.email) {
-			console.log('Logged In.');
-			console.log(userData.login.name);
-		}
-		if (error) console.log(error);
-	};
-
-	const handleGetCurrentUser = async () => {
-		console.log('User fetching...');
-		await refetch({ requestPolicy: 'network-only' });
-		setCurrentUser(data);
-		console.log(data);
-	};
-
-	const handleLogout = async () => {
-		console.log('Logging user out...');
-		const { data } = await logoutUser({});
-		if (data?.logout) {
-			console.log('Logged out.');
-			setCurrentUser(undefined);
-		}
-	};
-
-	const me = currentUser?.me;
+		resolver: yupResolver(loginSchema),
+		defaultValues: { email: defaultEmail },
+	});
 
 	return (
-		<>
-			<form onSubmit={handleSubmit(handleLogIn)} className="w-full mt-16">
-				<Input
-					name="email"
-					placeholder="Enter your email..."
-					icon={<AiTwotoneMail />}
-					register={register}
-					error={errors.email?.message}
-				/>
-				<Button type="submit" containerClassName="mt-12 text-center">
-					Submit
-				</Button>
-			</form>
-			<div className="flex">
-				{/* @ts-ignore */}
-				<Button type="button" onClick={handleLogIn} className="mt-4 mr-4">
-					Log in
-				</Button>
-				<Button
-					type="button"
-					onClick={handleGetCurrentUser}
-					className="mt-4 mr-4"
-				>
-					Get Me
-				</Button>
-				<OptionalWrapper data={me?.email}>
-					<p>Logged in user:</p>
-					<p>{me?.name}</p>
-					<p>{me?.email}</p>
-				</OptionalWrapper>
-				<Button type="button" onClick={handleLogout} className="mt-4">
-					Logout
-				</Button>
-			</div>
-		</>
+		<form onSubmit={handleSubmit(onSubmit)} className="w-full mt-16">
+			<Input
+				name="email"
+				type="email"
+				placeholder="Enter your email..."
+				icon={<AiTwotoneMail />}
+				register={register}
+				error={errors.email?.message}
+				disabled
+			/>
+			<Input
+				name="password"
+				type="password"
+				placeholder="Vault access password..."
+				icon={<AiFillLock />}
+				register={register}
+				error={errors.password?.message}
+				containerClassName="mt-4"
+				autoFocus
+			/>
+			<Button type="submit" containerClassName="mt-12 text-center">
+				Login
+			</Button>
+		</form>
 	);
 };
 

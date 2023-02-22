@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 
-type AuthContainerProps = {
+type AuthWrapperProps = {
 	children: React.ReactNode;
 };
 
-const AuthContainer: FC<AuthContainerProps> = ({ children }) => {
+const AuthWrapper: FC<AuthWrapperProps> = ({ children }) => {
 	return (
 		<div className="h-screen w-full relative overflow-hidden">
 			{/* Waves */}
@@ -29,4 +29,4 @@ const AuthContainer: FC<AuthContainerProps> = ({ children }) => {
 	);
 };
 
-export default AuthContainer;
+export default AuthWrapper;

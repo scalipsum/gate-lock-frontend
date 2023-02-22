@@ -1,4 +1,4 @@
-import React, { FC, InputHTMLAttributes, useState } from 'react';
+import React, { FC, InputHTMLAttributes, useEffect, useState } from 'react';
 import OptionalWrapper from './wrapper/OptionalWrapper';
 import { IconContext } from 'react-icons';
 import { colors } from '../../styles/colors';
@@ -35,8 +35,12 @@ const Input: FC<InputProps> = ({
 	register,
 	...props
 }) => {
-	const [value, setValue] = useState<string>();
+	const [value, setValue] = useState<string | number | readonly string[]>();
 	const [active, setActive] = useState<boolean>(false);
+
+	useEffect(() => {
+		if (props.defaultValue) setValue(props.defaultValue);
+	}, [props.defaultValue]);
 
 	// Colors
 	const leftSectionColor = active
