@@ -3,8 +3,9 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"start": "npm run generate && craco start",
-		"build": "npm run generate && craco build",
+		"start": "yarn generate && craco start",
+		"build": "yarn generate && craco build",
+		"build:digitalocean": "yarn install --production=false && yarn run build && rm -rf node_modules && yarn install --production --frozen-lockfile",
 		"test": "craco test",
 		"eject": "react-scripts eject",
 		"generate": "graphql-codegen --config codegen.yml"
@@ -62,5 +63,8 @@
 		"autoprefixer": "^9.8.8",
 		"postcss": "^7.0.39",
 		"tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
+	},
+	"engines": {
+		"yarn": "^1.22.19"
 	}
 }
