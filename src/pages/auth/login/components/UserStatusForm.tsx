@@ -65,28 +65,26 @@ const UserStatusForm: FC<UserStatusFormProps> = ({
 	} = useForm<UserStatusData>({ resolver: yupResolver(userStatusSchema) });
 
 	return (
-		<>
-			<form
-				onSubmit={handleSubmit(onSubmit)}
-				className="w-full mt-16 flex flex-col"
+		<form
+			onSubmit={handleSubmit(onSubmit)}
+			className="w-full mt-16 flex flex-col"
+		>
+			<Input
+				name="email"
+				placeholder="Enter your email..."
+				icon={<AiTwotoneMail />}
+				register={register}
+				error={errors.email?.message}
+			/>
+			<Button
+				type="submit"
+				containerClassName="mt-12 self-center"
+				onClick={() => setLoading(true)}
+				loading={loading}
 			>
-				<Input
-					name="email"
-					placeholder="Enter your email..."
-					icon={<AiTwotoneMail />}
-					register={register}
-					error={errors.email?.message}
-				/>
-				<Button
-					type="submit"
-					containerClassName="mt-12 self-center"
-					onClick={() => setLoading(true)}
-					loading={loading}
-				>
-					Submit
-				</Button>
-			</form>
-		</>
+				Submit
+			</Button>
+		</form>
 	);
 };
 
