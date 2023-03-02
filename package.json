@@ -5,7 +5,6 @@
 	"scripts": {
 		"start": "yarn generate && craco start",
 		"build": "yarn generate && craco build",
-		"build:digitalocean": "yarn install --production=false && yarn run build && rm -rf node_modules && yarn install --production --frozen-lockfile",
 		"test": "craco test",
 		"eject": "react-scripts eject",
 		"generate": "graphql-codegen --config codegen.yml"
