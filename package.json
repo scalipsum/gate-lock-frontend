@@ -5,6 +5,7 @@
 	"scripts": {
 		"start": "yarn generate && craco start",
 		"build": "yarn generate && craco build",
+		"build:serve": "npx serve -s build",
 		"test": "craco test",
 		"eject": "react-scripts eject",
 		"generate": "graphql-codegen --config codegen.yml",
