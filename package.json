@@ -8,7 +8,7 @@
 		"test": "craco test",
 		"eject": "react-scripts eject",
 		"generate": "graphql-codegen --config codegen.yml",
-		"deploy:prod": "git checkout main && git pull origin dev && git push origin main && git checkout dev"
+		"deploy:prod": "git push origin dev && git checkout main && git pull origin dev && git push origin main && git checkout dev"
 	},
 	"eslintConfig": {
 		"extends": [
