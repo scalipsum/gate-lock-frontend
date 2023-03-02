@@ -44,15 +44,15 @@ const Input: FC<InputProps> = ({
 
 	// Colors
 	const leftSectionColor = active
-		? `bg-${error ? 'red' : activeColor ?? 'blue'}`
-		: `bg-${error ? 'red' : 'gray3'}`;
-	const borderColor = `border-${error ? 'red' : 'gray2'}`;
-	const backgroundColor = `bg-${disabled ? 'gray2' : 'white'}`;
-	const textColor = `text-${disabled ? 'gray4' : 'black'}`;
+		? `${error ? 'bg-red' : activeColor ?? 'bg-blue'}`
+		: `${error ? 'bg-red' : 'bg-gray3'}`;
+	const borderColor = `${error ? 'border-red' : 'border-gray2'}`;
+	const backgroundColor = `${disabled ? 'bg-gray2' : 'bg-white'}`;
+	const textColor = `${disabled ? 'text-gray4' : 'text-black'}`;
 
 	// Sizes
-	const leftSectionWidth = `w-${icon ? 12 : 6}`;
-	const inputPaddingLeft = `pl-${icon ? 16 : 10}`;
+	const leftSectionWidth = `${icon ? 'w-12' : 'w-6'}`;
+	const inputPaddingLeft = `${icon ? 'pl-16' : 'pl-10'}`;
 
 	return (
 		<div className={`w-full ${containerClassName}`}>

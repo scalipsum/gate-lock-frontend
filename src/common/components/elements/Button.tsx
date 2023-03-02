@@ -19,14 +19,14 @@ const Button = ({
 	loading,
 	...props
 }: ButtonProps) => {
-	const backgroundColor = `bg-${
+	const backgroundColor = `${
 		kind === 'primary'
-			? 'blue'
+			? 'bg-blue'
 			: kind === 'secondary'
-			? 'gray6'
+			? 'bg-gray6'
 			: kind === 'approve'
-			? 'green'
-			: 'red'
+			? 'bg-green'
+			: 'bg-red'
 	}`;
 	// const buttonSize = `w-${size === 'normal' ? 'full' : 'auto'}`;
 	const padding =
