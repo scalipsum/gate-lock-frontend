@@ -2,23 +2,16 @@ import React, { FC, useState } from 'react';
 import Button from '../../../../common/components/elements/button';
 import Input from '../../../../common/components/elements/Input';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { InferType, object, string } from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useCreateVaultMutation } from '../../../../generated/graphql';
 import { showError, showSuccess } from '../../../../common/helpers/showToast';
 import { useMainContext } from '../../main.provider';
 
-const createVaultSchema = z.object({
-	name: z
-		.string({
-			required_error: 'Name is required',
-			invalid_type_error: 'Name must be a string',
-		})
-		.max(24),
+const createVaultSchema = object({
+	name: string().required('Vault name is required.'),
 });
-type CreateVaultData = {
-	name: string;
-};
+type CreateVaultData = InferType<typeof createVaultSchema>;
 
 const CreateVaultModal: FC = () => {
 	const { setModal } = useMainContext();
@@ -50,7 +43,8 @@ const CreateVaultModal: FC = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<CreateVaultData>({ resolver: zodResolver(createVaultSchema) });
+		// @ts-ignore
+	} = useForm<CreateVaultData>({ resolver: yupResolver(createVaultSchema) });
 
 	return (
 		<div>
