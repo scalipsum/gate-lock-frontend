@@ -11,7 +11,7 @@ type SingleVaultProps = {
 };
 
 const SingleVault: FC<SingleVaultProps> = ({ vault }) => {
-	const { setModalOpen } = useMainContext();
+	const { setModal } = useMainContext();
 	const [{ data: meData }] = useMeQuery();
 
 	/**
@@ -54,7 +54,44 @@ const SingleVault: FC<SingleVaultProps> = ({ vault }) => {
 					<Button
 						size="small"
 						className="z-20"
-						onClick={() => setModalOpen(true)}
+						onClick={() =>
+							setModal({
+								title: '2 Members',
+								subtitle: 'Personal Vault',
+								width: 'large',
+								height: 'large',
+								titlePosition: 'left',
+								content: (
+									<>
+										<h1>Hello</h1>
+										{/* <h1>Hello</h1>
+										<h1>Hello</h1>
+										<h1>Hello</h1>
+										<h1>Hello</h1>
+										<h1>Hello</h1>
+										<h1>Hello</h1>
+										<h1>Hello</h1>
+										<h1>Hello</h1>
+										<h1>Hello</h1>
+										<h1>Hello</h1>
+										<h1>Hello</h1>
+										<h1>Hello</h1>
+										<h1>Hello</h1>
+										<h1>Hello</h1>
+										<h1>Hello</h1>
+										<h1>Hello</h1>
+										<h1>Hello</h1>
+										<h1>Hello</h1>
+										<h1>Hello</h1>
+										<h1>Hello</h1>
+										<h1>Hello</h1>
+										<h1>Hello</h1>
+										<h1>Hello</h1>
+										<h1>Hello</h1> */}
+									</>
+								),
+							})
+						}
 					>
 						{membersNumber}
 					</Button>

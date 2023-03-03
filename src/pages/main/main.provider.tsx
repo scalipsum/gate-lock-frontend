@@ -1,29 +1,23 @@
-import React, {
-	createContext,
-	Dispatch,
-	FC,
-	SetStateAction,
-	useContext,
-	useState,
-} from 'react';
+import React, { createContext, FC, useContext, useState } from 'react';
+import { ModalType } from '../../common/components/generic/Modal';
 
 type MainContextType = {
-	modalOpen: boolean;
-	setModalOpen: Dispatch<SetStateAction<boolean>>;
+	modal: ModalType | null;
+	setModal: React.Dispatch<React.SetStateAction<ModalType | null>>;
 };
 
 export const MainContext = createContext<MainContextType>({
-	modalOpen: false,
-	setModalOpen: () => {},
+	modal: null,
+	setModal: () => {},
 });
 
 type MainContextProps = { children: React.ReactNode };
 
 const MainProvider: FC<MainContextProps> = ({ children }) => {
-	const [modalOpen, setModalOpen] = useState<boolean>(false);
+	const [modal, setModal] = useState<ModalType | null>(null);
 
 	return (
-		<MainContext.Provider value={{ modalOpen, setModalOpen }}>
+		<MainContext.Provider value={{ modal, setModal }}>
 			{children}
 		</MainContext.Provider>
 	);
