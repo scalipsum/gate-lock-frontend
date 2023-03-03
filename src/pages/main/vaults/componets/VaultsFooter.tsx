@@ -10,9 +10,6 @@ const VaultsFooter: FC<VaultsFooterProps> = () => {
 	const { setIsLoggedIn } = useAuthContext();
 	const [, logout] = useLogoutMutation();
 
-	/**
-	 * Handle Logout
-	 */
 	const handleLogout = async () => {
 		const { data, error } = await logout({});
 		if (data?.logout) {
@@ -22,7 +19,7 @@ const VaultsFooter: FC<VaultsFooterProps> = () => {
 	};
 
 	return (
-		<div className="absolute bottom-0 left-0 right-0 flex justify-end pb-2">
+		<div className="absolute bottom-0 left-0 right-0 flex justify-end">
 			<TextButton onClick={handleLogout}>Logout</TextButton>
 		</div>
 	);

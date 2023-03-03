@@ -12,7 +12,7 @@ const MainWrapper: FC<MainWrapperProps> = ({ children, title }) => {
 
 	return (
 		<div className="px-6 h-screen w-full">
-			<div className="bg-white max-w-container mx-auto pt-8 px-12 h-full shadow-container">
+			<div className="bg-white max-w-container mx-auto px-12 h-full shadow-container">
 				{children}
 			</div>
 		</div>
