@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { AiOutlineCluster } from 'react-icons/ai';
 import SymbolLogo from '../../../../assets/svg/gl-logo-symbol.svg';
-import Button from '../../../../common/components/elements/Button';
+import Button from '../../../../common/components/elements/button';
 import { useAuthContext } from '../../../auth/auth.provider';
 
 export type VaultsHeaderProps = {};

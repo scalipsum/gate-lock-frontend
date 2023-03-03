@@ -1,10 +1,10 @@
 import React, { ButtonHTMLAttributes } from 'react';
-import spinner from '../../../assets/gif/spinner.gif';
-import OptionalWrapper from './wrapper/OptionalWrapper';
+import spinner from '../../../../assets/gif/spinner.gif';
+import OptionalWrapper from '../wrapper/OptionalWrapper';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	size?: 'normal' | 'small';
-	kind?: 'primary' | 'secondary' | 'approve' | 'deny';
+	kind?: 'primary' | 'secondary' | 'approve' | 'deny' | 'text';
 	className?: string;
 	containerClassName?: string;
 	loading?: boolean;
@@ -26,8 +26,11 @@ const Button = ({
 			? 'bg-gray6'
 			: kind === 'approve'
 			? 'bg-green'
-			: 'bg-red'
+			: kind === 'deny'
+			? 'bg-red'
+			: 'bg-transparent'
 	}`;
+
 	// const buttonSize = `w-${size === 'normal' ? 'full' : 'auto'}`;
 	const padding =
 		size === 'small'
@@ -39,7 +42,7 @@ const Button = ({
 	return (
 		<div className={containerClassName}>
 			<button
-				className={`${className} ${backgroundColor} ${padding} text-white rounded-lg
+				className={`${className} ${backgroundColor} ${padding} text-white rounded-lg uppercase font-bold text-sm
                 shadow-md shadow-black-500/30 transition-all transform hover:shadow-lg hover:shadow-black-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none
                 flex items-center justify-center
             `}
