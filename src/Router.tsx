@@ -14,27 +14,34 @@ import MainWrapper from './pages/main/main.wrapper';
 import VaultsPage from './pages/main/vaults/vaults.page';
 
 const Router: FC = () => {
-	const { isLoggedIn } = useAuthContext();
+	const { isLoggedIn, userLoading } = useAuthContext();
 
 	const redirectHome = () => <Navigate to="/" replace />;
 	const redirectAuth = () => <Navigate to="/auth/login" replace />;
 
 	const router = createBrowserRouter([
+		// Main
 		{
 			path: '/',
-			element: isLoggedIn ? (
+			element: userLoading ? (
+				<></>
+			) : !isLoggedIn ? (
+				redirectAuth()
+			) : (
 				<MainWrapper title="Main">
 					<VaultsPage />
 				</MainWrapper>
-			) : (
-				redirectAuth()
 			),
 			errorElement: isLoggedIn ? <ErrorPage /> : redirectAuth(),
 		},
 		// Auth
 		{
 			path: '/auth/',
-			element: isLoggedIn ? redirectHome() : undefined,
+			element: userLoading ? (
+				<></>
+			) : isLoggedIn ? (
+				redirectHome()
+			) : undefined,
 			children: [
 				{
 					path: 'login',
