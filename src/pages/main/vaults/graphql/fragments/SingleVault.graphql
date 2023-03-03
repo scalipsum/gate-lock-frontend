@@ -1,0 +1,17 @@
+fragment SingleVault on Vault {
+	id
+	name
+	createdBy {
+		id
+		email
+	}
+	members {
+		id
+		name
+		email
+	}
+	tags {
+		id
+		label
+	}
+}

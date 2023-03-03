@@ -1,0 +1,5 @@
+query GetAllVaults {
+	getAllVaults {
+		...SingleVault
+	}
+}

@@ -27,11 +27,18 @@ module.exports = {
 			'6xl': '4rem',
 		},
 		maxWidth: {
-			container: '1120px',
+			container: '1920px',
 		},
 		extend: {
-			spacing: {
-				128: '32rem',
+			boxShadow: {
+				container: '0px 0px 10px 0px rgba(0, 0, 0, 0.05)',
+			},
+			zIndex: {
+				100: '100',
+				125: '125',
+			},
+			scale: {
+				80: '0.8',
 			},
 		},
 	},

@@ -10,31 +10,38 @@ import CreateAccountPage from './pages/auth/createAccount/createAccount.page';
 import LoginPage from './pages/auth/login/login.page';
 import MessagePage from './pages/auth/message/message.page';
 import ErrorPage from './pages/main/error/error.page';
-import HomePage from './pages/main/home/home.page';
 import MainWrapper from './pages/main/main.wrapper';
+import VaultsPage from './pages/main/vaults/vaults.page';
 
 const Router: FC = () => {
-	const { isLoggedIn } = useAuthContext();
+	const { isLoggedIn, userLoading } = useAuthContext();
 
 	const redirectHome = () => <Navigate to="/" replace />;
 	const redirectAuth = () => <Navigate to="/auth/login" replace />;
 
 	const router = createBrowserRouter([
+		// Main
 		{
 			path: '/',
-			element: isLoggedIn ? (
-				<MainWrapper title="Main">
-					<HomePage />
-				</MainWrapper>
-			) : (
+			element: userLoading ? (
+				<></>
+			) : !isLoggedIn ? (
 				redirectAuth()
+			) : (
+				<MainWrapper title="Main">
+					<VaultsPage />
+				</MainWrapper>
 			),
 			errorElement: isLoggedIn ? <ErrorPage /> : redirectAuth(),
 		},
 		// Auth
 		{
 			path: '/auth/',
-			element: isLoggedIn ? redirectHome() : undefined,
+			element: userLoading ? (
+				<></>
+			) : isLoggedIn ? (
+				redirectHome()
+			) : undefined,
 			children: [
 				{
 					path: 'login',
