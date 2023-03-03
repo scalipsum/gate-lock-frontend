@@ -55,7 +55,7 @@ const Button = ({
 					<img
 						src={spinner}
 						alt="Loading..."
-						className="-ml-4 absolute top-1.5 left-8"
+						className="w-10 h-10 -ml-4 absolute top-1.5 left-8"
 					/>
 				</OptionalWrapper>
 				{children}

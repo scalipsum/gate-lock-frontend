@@ -2,12 +2,8 @@ import React, { FC } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { useMainContext } from '../../../pages/main/main.provider';
 import { colors } from '../../styles/colors';
-import OptionalWrapper from '../elements/wrapper/OptionalWrapper';
 
 export type ModalType = {
-	title?: string;
-	subtitle?: string;
-	titlePosition?: 'left' | 'center';
 	width?: 'small' | 'medium' | 'large';
 	height?: 'small' | 'medium' | 'large';
 	content?: React.ReactNode;
@@ -41,11 +37,6 @@ const Modal: FC = () => {
 			: 'auto'
 	}`;
 
-	/**
-	 * Title position
-	 */
-	const titlePosition = modal?.titlePosition === 'left' ? '' : 'text-center';
-
 	return (
 		<>
 			{/* Window */}
@@ -54,8 +45,8 @@ const Modal: FC = () => {
 					modal?.scrollable && 'overflow-y-scroll'
 				} ${width} ${height} bg-white rounded-lg px-8 py-6 -mt-4 transform transition-all duration-150 z-125 ${
 					modal
-						? 'opacity-1 visible scale-80'
-						: 'opacity-0 invisible scale-100'
+						? 'opacity-1 visible scale-100'
+						: 'opacity-0 invisible scale-80'
 				}`}
 			>
 				{/* Close button */}
@@ -71,18 +62,7 @@ const Modal: FC = () => {
 						/>
 					</button>
 				</div>
-				{/* Header */}
-				<OptionalWrapper data={modal?.title}>
-					<div className="sticky">
-						<h3 className={`${titlePosition}`}>{modal?.title}</h3>
-						<OptionalWrapper data={modal?.subtitle}>
-							<p className={`${titlePosition} -mt-1`}>
-								{modal?.subtitle}
-							</p>
-						</OptionalWrapper>
-					</div>
-				</OptionalWrapper>
-				<div className="mt-8">
+				<div>
 					{/* Content */}
 					{modal?.content}
 				</div>

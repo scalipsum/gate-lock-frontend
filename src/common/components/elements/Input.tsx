@@ -11,6 +11,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 	error?: string | any;
 	disabled?: boolean;
 	icon?: JSX.Element;
+	autoFocus?: boolean;
 	// Styling
 	containerClassName?: string;
 	className?: string;
@@ -27,6 +28,7 @@ const Input: FC<InputProps> = ({
 	error,
 	disabled,
 	icon,
+	autoFocus,
 	// Styling
 	className,
 	containerClassName,
@@ -41,6 +43,10 @@ const Input: FC<InputProps> = ({
 	useEffect(() => {
 		if (props.defaultValue) setValue(props.defaultValue);
 	}, [props.defaultValue]);
+
+	useEffect(() => {
+		if (autoFocus) setActive(true);
+	}, [autoFocus]);
 
 	// Colors
 	const leftSectionColor = active
@@ -92,6 +98,7 @@ const Input: FC<InputProps> = ({
 					value={value}
 					onChange={(e) => setValue(e.target.value)}
 					disabled={disabled}
+					autoFocus={autoFocus}
 					{...register(name)}
 					{...props}
 				/>

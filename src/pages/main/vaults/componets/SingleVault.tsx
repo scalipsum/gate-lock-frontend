@@ -4,14 +4,12 @@ import { Link } from 'react-router-dom';
 import Button from '../../../../common/components/elements/button';
 import OptionalWrapper from '../../../../common/components/elements/wrapper/OptionalWrapper';
 import { SingleVaultFragment, useMeQuery } from '../../../../generated/graphql';
-import { useMainContext } from '../../main.provider';
 
 type SingleVaultProps = {
 	vault: SingleVaultFragment;
 };
 
 const SingleVault: FC<SingleVaultProps> = ({ vault }) => {
-	const { setModal } = useMainContext();
 	const [{ data: meData }] = useMeQuery();
 
 	/**
@@ -51,48 +49,7 @@ const SingleVault: FC<SingleVaultProps> = ({ vault }) => {
 
 				{/* Right */}
 				<div className="flex flex-col items-center">
-					<Button
-						size="small"
-						className="z-20"
-						onClick={() =>
-							setModal({
-								title: '2 Members',
-								subtitle: 'Personal Vault',
-								width: 'large',
-								height: 'large',
-								titlePosition: 'left',
-								content: (
-									<>
-										<h1>Hello</h1>
-										{/* <h1>Hello</h1>
-										<h1>Hello</h1>
-										<h1>Hello</h1>
-										<h1>Hello</h1>
-										<h1>Hello</h1>
-										<h1>Hello</h1>
-										<h1>Hello</h1>
-										<h1>Hello</h1>
-										<h1>Hello</h1>
-										<h1>Hello</h1>
-										<h1>Hello</h1>
-										<h1>Hello</h1>
-										<h1>Hello</h1>
-										<h1>Hello</h1>
-										<h1>Hello</h1>
-										<h1>Hello</h1>
-										<h1>Hello</h1>
-										<h1>Hello</h1>
-										<h1>Hello</h1>
-										<h1>Hello</h1>
-										<h1>Hello</h1>
-										<h1>Hello</h1>
-										<h1>Hello</h1>
-										<h1>Hello</h1> */}
-									</>
-								),
-							})
-						}
-					>
+					<Button size="small" className="z-20">
 						{membersNumber}
 					</Button>
 					<OptionalWrapper data={createdBy === 'You'}>

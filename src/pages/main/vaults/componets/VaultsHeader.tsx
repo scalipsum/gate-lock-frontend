@@ -4,11 +4,14 @@ import SymbolLogo from '../../../../assets/svg/gl-logo-symbol.svg';
 import Button from '../../../../common/components/elements/button';
 import OptionalWrapper from '../../../../common/components/elements/wrapper/OptionalWrapper';
 import { useMeQuery } from '../../../../generated/graphql';
+import { useMainContext } from '../../main.provider';
+import CreateVaultModal from './CreateVaultModal';
 
 export type VaultsHeaderProps = {};
 
 const VaultsHeader: FC<VaultsHeaderProps> = () => {
 	const [{ data }] = useMeQuery();
+	const { setModal } = useMainContext();
 
 	return (
 		<div className="flex justify-between items-center mb-8 pt-8">
@@ -28,7 +31,17 @@ const VaultsHeader: FC<VaultsHeaderProps> = () => {
 
 			{/* Right */}
 			<div className="-mt-6">
-				<Button>Add vault</Button>
+				<Button
+					onClick={() =>
+						setModal({
+							content: <CreateVaultModal />,
+							width: 'medium',
+						})
+					}
+					type="button"
+				>
+					Add vault
+				</Button>
 			</div>
 		</div>
 	);
