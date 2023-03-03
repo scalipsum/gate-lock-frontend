@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"start": "yarn generate && craco start",
+		"start:dev": "yarn generate && craco start",
 		"build": "yarn generate && craco build",
 		"build:serve": "npx serve -s build",
 		"test": "craco test",

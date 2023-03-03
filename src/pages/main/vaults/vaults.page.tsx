@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
+import { AiOutlineCluster } from 'react-icons/ai';
 import Button from '../../../common/components/elements/Button';
 import { showError, showSuccess } from '../../../common/helpers/showToast';
 import { useLogoutMutation } from '../../../generated/graphql';
 import { useAuthContext } from '../../auth/auth.provider';
+import VaultsHeader from './componets/VaultsHeader';
 
-const HomePage: FC = () => {
+const VaultsPage: FC = () => {
 	/**
 	 * Handle Logout
 	 */
@@ -20,11 +22,12 @@ const HomePage: FC = () => {
 	};
 
 	return (
-		<div className="px-8 py-4">
-			<h1>Home Page</h1>
+		<>
+			<VaultsHeader firstName="Vlad" />
+
 			<Button onClick={handleLogout}>Logout</Button>
-		</div>
+		</>
 	);
 };
 
-export default HomePage;
+export default VaultsPage;

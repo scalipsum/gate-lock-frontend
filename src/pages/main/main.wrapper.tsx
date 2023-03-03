@@ -6,12 +6,17 @@ type MainWrapperProps = {
 };
 
 const MainWrapper: FC<MainWrapperProps> = ({ children, title }) => {
-	// Set Page Title
 	useEffect(() => {
 		document.title = `${title} | Gate Lock`;
 	}, [title]);
 
-	return <div className="px-8 py-4">{children}</div>;
+	return (
+		<div className="px-6 h-screen w-full">
+			<div className="bg-white max-w-container mx-auto pt-8 px-12 h-full shadow-container">
+				{children}
+			</div>
+		</div>
+	);
 };
 
 export default MainWrapper;
