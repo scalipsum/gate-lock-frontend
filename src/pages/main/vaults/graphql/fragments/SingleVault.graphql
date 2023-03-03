@@ -2,6 +2,7 @@ fragment SingleVault on Vault {
 	id
 	name
 	createdBy {
+		id
 		email
 	}
 	members {

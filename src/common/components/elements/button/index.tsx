@@ -34,25 +34,28 @@ const Button = ({
 	// const buttonSize = `w-${size === 'normal' ? 'full' : 'auto'}`;
 	const padding =
 		size === 'small'
-			? 'px-4 py-2'
+			? 'px-3 py-1.5'
 			: loading
 			? 'py-4 pr-10 pl-16'
 			: 'py-4 px-10';
 
+	const fontWeight = size === 'small' ? 'font-medium' : 'font-bold';
+
 	return (
 		<div className={containerClassName}>
 			<button
-				className={`${className} ${backgroundColor} ${padding} text-white rounded-lg uppercase font-bold text-sm
+				className={`${className} ${backgroundColor} ${padding} ${fontWeight} text-white rounded-lg uppercase
                 shadow-md shadow-black-500/30 transition-all transform hover:shadow-lg hover:shadow-black-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none
                 flex items-center justify-center
             `}
+				style={{ fontSize: size === 'small' ? 12 : 14 }}
 				{...props}
 			>
 				<OptionalWrapper data={loading}>
 					<img
 						src={spinner}
 						alt="Loading..."
-						className="w-10 h-10 -ml-4 absolute top-1.5 left-8"
+						className="-ml-4 absolute top-1.5 left-8"
 					/>
 				</OptionalWrapper>
 				{children}
