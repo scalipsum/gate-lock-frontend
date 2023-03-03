@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import Button from '../../../../common/components/elements/button';
 import OptionalWrapper from '../../../../common/components/elements/wrapper/OptionalWrapper';
 import { SingleVaultFragment, useMeQuery } from '../../../../generated/graphql';
+import { useMainContext } from '../../main.provider';
 
 type SingleVaultProps = {
 	vault: SingleVaultFragment;
 };
 
 const SingleVault: FC<SingleVaultProps> = ({ vault }) => {
+	const { setModalOpen } = useMainContext();
 	const [{ data: meData }] = useMeQuery();
 
 	/**
@@ -52,7 +54,7 @@ const SingleVault: FC<SingleVaultProps> = ({ vault }) => {
 					<Button
 						size="small"
 						className="z-20"
-						onClick={() => console.log('Hello')}
+						onClick={() => setModalOpen(true)}
 					>
 						{membersNumber}
 					</Button>

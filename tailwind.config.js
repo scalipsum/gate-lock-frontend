@@ -33,6 +33,13 @@ module.exports = {
 			boxShadow: {
 				container: '0px 0px 10px 0px rgba(0, 0, 0, 0.05)',
 			},
+			zIndex: {
+				100: '100',
+				125: '125',
+			},
+			scale: {
+				80: '0.8',
+			},
 		},
 	},
 	variants: {
