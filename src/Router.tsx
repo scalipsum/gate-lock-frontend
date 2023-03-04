@@ -28,7 +28,7 @@ const Router: FC = () => {
 			) : !isLoggedIn ? (
 				redirectAuth()
 			) : (
-				<MainWrapper title="Main">
+				<MainWrapper title="All Vaults">
 					<VaultsPage />
 				</MainWrapper>
 			),

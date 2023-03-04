@@ -9,7 +9,7 @@ import { showError, showSuccess } from '../../../../common/helpers/showToast';
 import { useMainContext } from '../../main.provider';
 
 const createVaultSchema = object({
-	name: string().required('Vault name is required.'),
+	name: string().required('Vault name is required.').max(24),
 });
 type CreateVaultData = InferType<typeof createVaultSchema>;
 
@@ -62,7 +62,7 @@ const CreateVaultModal: FC = () => {
 					register={register}
 					error={errors.name?.message}
 					infoText="Max 24 chars."
-					autoFocus
+					style={{ textTransform: 'capitalize' }}
 				/>
 				<Button
 					type="submit"

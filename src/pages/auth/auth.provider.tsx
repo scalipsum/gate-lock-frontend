@@ -31,9 +31,11 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 	 * Check If Already Logged In
 	 */
 	const [{ data, fetching }] = useMeQuery();
+
 	useEffect(() => {
 		setUserLoading(fetching);
 	}, [fetching]);
+
 	useEffect(() => {
 		if (data?.me?.id) {
 			setIsLoggedIn(true);

@@ -4,12 +4,16 @@ import { Link } from 'react-router-dom';
 import Button from '../../../../common/components/elements/button';
 import OptionalWrapper from '../../../../common/components/elements/wrapper/OptionalWrapper';
 import { SingleVaultFragment, useMeQuery } from '../../../../generated/graphql';
+import { useMainContext } from '../../main.provider';
+import EditVaultModal from './EditVaultModal';
 
 type SingleVaultProps = {
 	vault: SingleVaultFragment;
 };
 
 const SingleVault: FC<SingleVaultProps> = ({ vault }) => {
+	const { setModal } = useMainContext();
+
 	const [{ data: meData }] = useMeQuery();
 
 	/**
@@ -41,7 +45,7 @@ const SingleVault: FC<SingleVaultProps> = ({ vault }) => {
 					<div className="flex items-center my-6 ml-4 pr-8">
 						<AiOutlineHdd size="64" className="mr-2" />
 						<div>
-							<h3>{vault.name}</h3>
+							<h3 className="truncate">{vault.name}</h3>
 							<p className="-mt-1">created by {createdBy}</p>
 						</div>
 					</div>
@@ -57,6 +61,17 @@ const SingleVault: FC<SingleVaultProps> = ({ vault }) => {
 							size="small"
 							kind="secondary"
 							className="mt-1 -mb-2"
+							onClick={() =>
+								setModal({
+									content: (
+										<EditVaultModal
+											id={vault.id}
+											name={vault.name}
+										/>
+									),
+									width: 'medium',
+								})
+							}
 						>
 							Edit
 						</Button>
