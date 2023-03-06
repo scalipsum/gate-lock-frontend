@@ -45,12 +45,12 @@ const UserStatusForm: FC<UserStatusFormProps> = ({
 		console.log(statusData?.checkUserStatus);
 
 		switch (statusData?.checkUserStatus) {
-			case UserStatus.NotConfirmed:
+			case UserStatus.NotFound || UserStatus.NotConfirmed:
 				return navigate('/auth/email-sent');
-			case UserStatus.NotApproved:
-				return navigate('/auth/account-sent');
-			case UserStatus.Approved:
+			case UserStatus.ConfirmedNotUpdated:
 				return navigate('/auth/create-account');
+			case UserStatus.NotApproved:
+				return navigate('/auth/not-approved');
 			default:
 				return;
 		}

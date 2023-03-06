@@ -9,6 +9,7 @@ import AuthWrapper from './pages/auth/auth.wrapper';
 import CreateAccountPage from './pages/auth/createAccount/createAccount.page';
 import LoginPage from './pages/auth/login/login.page';
 import MessagePage from './pages/auth/message/message.page';
+import UserConfirmPage from './pages/auth/userConfirm/userConfirm.page';
 import ErrorPage from './pages/main/error/error.page';
 import MainWrapper from './pages/main/main.wrapper';
 import VaultsPage from './pages/main/vaults/vaults.page';
@@ -78,6 +79,14 @@ const Router: FC = () => {
 					element: (
 						<AuthWrapper title="Create account">
 							<CreateAccountPage />
+						</AuthWrapper>
+					),
+				},
+				{
+					path: 'user-confirm/:id',
+					element: (
+						<AuthWrapper title="Create account">
+							<UserConfirmPage />
 						</AuthWrapper>
 					),
 				},
