@@ -17,6 +17,7 @@ const AuthWrapper: FC<AuthWrapperProps> = ({ children, title }) => {
 	const location = useLocation();
 	const emailSentRoute = location.pathname === '/auth/email-sent';
 	const notApprovedRoute = location.pathname === '/auth/not-approved';
+	const createAccountRoute = location.pathname === '/auth/create-account';
 
 	return (
 		<div className="h-screen w-full relative overflow-hidden">
@@ -30,7 +31,11 @@ const AuthWrapper: FC<AuthWrapperProps> = ({ children, title }) => {
 
 			{/* Copyright */}
 			<div className="absolute w-full bottom-0 left-0 flex flex-col items-center">
-				<OptionalWrapper data={emailSentRoute || notApprovedRoute}>
+				<OptionalWrapper
+					data={
+						emailSentRoute || notApprovedRoute || createAccountRoute
+					}
+				>
 					<img
 						src={TextLogo}
 						alt="Gate Lock Logo Text "

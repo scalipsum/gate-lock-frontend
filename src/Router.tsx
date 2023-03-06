@@ -68,7 +68,7 @@ const Router: FC = () => {
 					element: (
 						<AuthWrapper title="Not approved">
 							<MessagePage
-								title="Not approved!"
+								title="Not approved yet!"
 								description="An admin is currently reviewing your application. Please come back later."
 							/>
 						</AuthWrapper>

@@ -19,7 +19,10 @@ const UserConfirmPage: FC = () => {
 				console.log(data?.confirmUser);
 				if (data?.confirmUser) {
 					showSuccess('User confirmed.');
-					navigate('/auth/create-account');
+					navigate('/auth/create-account', {
+						replace: true,
+						state: { uid: data.confirmUser },
+					});
 				} else {
 					navigate('/auth/login');
 					showError('User could not be confirmed.');
