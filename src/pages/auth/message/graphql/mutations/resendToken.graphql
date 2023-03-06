@@ -1,0 +1,3 @@
+mutation ResendToken($input: ResendTokenInput!) {
+	resendToken(input: $input)
+}

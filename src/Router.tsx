@@ -57,19 +57,19 @@ const Router: FC = () => {
 					element: (
 						<AuthWrapper title="Email Sent">
 							<MessagePage
-								title="Email sent for approval."
-								description="You'll receive an email to log in once an Admin has accepted you."
+								title="An email was sent!"
+								description="Check your inbox for a confirmation link so you can create your account."
 							/>
 						</AuthWrapper>
 					),
 				},
 				{
-					path: 'account-sent',
+					path: 'not-approved',
 					element: (
 						<AuthWrapper title="Not approved">
 							<MessagePage
-								title="Not approved by an admin yet."
-								description="Please come back later."
+								title="Not approved!"
+								description="An admin is currently reviewing your application. Please come back later."
 							/>
 						</AuthWrapper>
 					),

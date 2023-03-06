@@ -10,6 +10,7 @@ import {
 	UserStatus,
 } from '../../../../generated/graphql';
 import { useNavigate } from 'react-router-dom';
+import { showSuccess } from '../../../../common/helpers/showToast';
 
 type UserStatusFormProps = {
 	setUserStatus: Dispatch<SetStateAction<UserStatus | undefined>>;
@@ -46,9 +47,16 @@ const UserStatusForm: FC<UserStatusFormProps> = ({
 
 		switch (statusData?.checkUserStatus) {
 			case UserStatus.NotFound:
-				return navigate('/auth/email-sent');
+				showSuccess('Email sent.');
+				return navigate('/auth/email-sent', {
+					replace: true,
+					state: { email: data.email },
+				});
 			case UserStatus.NotConfirmed:
-				return navigate('/auth/email-sent');
+				return navigate('/auth/email-sent', {
+					replace: true,
+					state: { email: data.email },
+				});
 			case UserStatus.ConfirmedNotUpdated:
 				return navigate('/auth/create-account');
 			case UserStatus.NotApproved:
