@@ -5,6 +5,9 @@ import { string, object, InferType } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '../../../../common/components/elements/button';
 import Input from '../../../../common/components/elements/Input';
+import { useUpdateUserMutation } from '../../../../generated/graphql';
+import { showError, showSuccess } from '../../../../common/helpers/showToast';
+import { useNavigate } from 'react-router-dom';
 
 const createAccountSchema = object({
 	firstName: string().required('First name is required.'),
@@ -19,12 +22,31 @@ type CreateAccountFormProps = {
 };
 
 const CreateAccountForm: FC<CreateAccountFormProps> = ({ userId }) => {
-	const [loading, setLoading] = useState<boolean>(false);
+	const navigate = useNavigate();
 
+	const [loading, setLoading] = useState<boolean>(false);
+	const [, updateUser] = useUpdateUserMutation();
+
+	/**
+	 * Update User
+	 * @param data
+	 */
 	const onSubmit = async (data: CreateAccountData) => {
 		setLoading(true);
-		console.log(data);
-		setLoading(false);
+		const { data: updateData, error: updateError } = await updateUser({
+			input: {
+				id: userId,
+				firstName: data.firstName,
+				lastName: data.lastName,
+				password: data.password,
+			},
+		});
+		if (updateData?.updateUser.email) {
+			showSuccess('Account created.');
+			return navigate(0);
+		}
+		showError(updateError?.message);
+		return setLoading(false);
 	};
 
 	/**
@@ -76,7 +98,7 @@ const CreateAccountForm: FC<CreateAccountFormProps> = ({ userId }) => {
 			/>
 			<Button
 				type="submit"
-				containerClassName="mt-16 self-center"
+				containerClassName="mt-12 self-center"
 				loading={loading}
 			>
 				Join
