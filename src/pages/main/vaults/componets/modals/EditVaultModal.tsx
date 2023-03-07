@@ -1,17 +1,18 @@
 import React, { FC, useState } from 'react';
-import Button from '../../../../common/components/elements/button';
-import Input from '../../../../common/components/elements/Input';
+import Button from '../../../../../common/components/elements/button';
+import Input from '../../../../../common/components/elements/Input';
 import { useForm } from 'react-hook-form';
 import { InferType, object, string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useUpdateVaultMutation } from '../../../../../generated/graphql';
 import {
-	useDeleteVaultMutation,
-	useUpdateVaultMutation,
-} from '../../../../generated/graphql';
-import { showError, showSuccess } from '../../../../common/helpers/showToast';
-import { useMainContext } from '../../main.provider';
+	showError,
+	showSuccess,
+} from '../../../../../common/helpers/showToast';
+import { useMainContext } from '../../../main.provider';
 import { OperationContext } from 'urql';
-import TextButton from '../../../../common/components/elements/button/TextButton';
+import TextButton from '../../../../../common/components/elements/button/TextButton';
+import ConfirmDeleteModal from './ConfirmDeleteModal';
 
 const editVaultSchema = object({
 	name: string().required('Vault name is required.').max(16),
@@ -32,25 +33,7 @@ const EditVaultModal: FC<EditVaultModalProps> = ({
 	const { setModal } = useMainContext();
 	const [loading, setLoading] = useState<boolean>(false);
 
-	const [, deleteVault] = useDeleteVaultMutation();
 	const [, updateVault] = useUpdateVaultMutation();
-
-	/**
-	 * Vault Delete
-	 */
-	const onVaultDelete = async () => {
-		setLoading(true);
-		const { data: deleteData, error: deleteError } = await deleteVault({
-			input: { id },
-		});
-		if (deleteData?.deleteVault) {
-			await refetchVaults();
-			showSuccess('Vault deleted.');
-			setModal(null);
-		}
-		if (deleteError) showError(deleteError.message);
-		setLoading(false);
-	};
 
 	/**
 	 * Update Vault - Form Submit
@@ -69,6 +52,22 @@ const EditVaultModal: FC<EditVaultModalProps> = ({
 		}
 		if (updateVaultError) showError(updateVaultError.message);
 		setLoading(false);
+	};
+
+	const closeAndOpenConfirmModal = () => {
+		setModal(null);
+		setTimeout(() => {
+			setModal({
+				content: (
+					<ConfirmDeleteModal
+						id={id}
+						name={name}
+						refetchVaults={refetchVaults}
+					/>
+				),
+				width: 'medium',
+			});
+		}, 50);
 	};
 
 	/**
@@ -101,11 +100,20 @@ const EditVaultModal: FC<EditVaultModalProps> = ({
 					infoText="Max 24 chars."
 					style={{ textTransform: 'capitalize' }}
 				/>
-				<div className="flex justify-between items-end mt-8">
-					<Button type="submit" loading={loading}>
-						Update Name
+				<div className="w-full flex justify-between mt-6">
+					<Button
+						type="submit"
+						loading={loading}
+						className="w-72"
+						containerClassName="self-start"
+					>
+						Update Vault Name
 					</Button>
-					<TextButton type="button" onClick={onVaultDelete}>
+					<TextButton
+						type="button"
+						onClick={closeAndOpenConfirmModal}
+						containerClassName="self-end"
+					>
 						Delete vault
 					</TextButton>
 				</div>

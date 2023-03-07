@@ -1,12 +1,15 @@
 import React, { FC, useState } from 'react';
-import Button from '../../../../common/components/elements/button';
-import Input from '../../../../common/components/elements/Input';
+import Button from '../../../../../common/components/elements/button';
+import Input from '../../../../../common/components/elements/Input';
 import { useForm } from 'react-hook-form';
 import { InferType, object, string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useCreateVaultMutation } from '../../../../generated/graphql';
-import { showError, showSuccess } from '../../../../common/helpers/showToast';
-import { useMainContext } from '../../main.provider';
+import { useCreateVaultMutation } from '../../../../../generated/graphql';
+import {
+	showError,
+	showSuccess,
+} from '../../../../../common/helpers/showToast';
+import { useMainContext } from '../../../main.provider';
 import { OperationContext } from 'urql';
 
 const createVaultSchema = object({

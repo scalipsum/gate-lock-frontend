@@ -6,7 +6,7 @@ import Button from '../../../../common/components/elements/button';
 import OptionalWrapper from '../../../../common/components/elements/wrapper/OptionalWrapper';
 import { SingleVaultFragment, useMeQuery } from '../../../../generated/graphql';
 import { useMainContext } from '../../main.provider';
-import EditVaultModal from './EditVaultModal';
+import EditVaultModal from './modals/EditVaultModal';
 
 type SingleVaultProps = {
 	vault: SingleVaultFragment;

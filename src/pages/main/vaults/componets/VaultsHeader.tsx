@@ -6,7 +6,7 @@ import Button from '../../../../common/components/elements/button';
 import OptionalWrapper from '../../../../common/components/elements/wrapper/OptionalWrapper';
 import { useMeQuery } from '../../../../generated/graphql';
 import { useMainContext } from '../../main.provider';
-import CreateVaultModal from './CreateVaultModal';
+import CreateVaultModal from './modals/CreateVaultModal';
 
 export type VaultsHeaderProps = {
 	refetchVaults: (opts?: Partial<OperationContext> | undefined) => void;
