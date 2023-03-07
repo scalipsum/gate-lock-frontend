@@ -19,7 +19,7 @@ const VaultsFooter: FC<VaultsFooterProps> = () => {
 	};
 
 	return (
-		<div className="absolute bottom-0 left-0 right-0 flex justify-end">
+		<div className="absolute bottom-0 left-0 right-0 flex justify-end pb-4">
 			<TextButton onClick={handleLogout}>Logout</TextButton>
 		</div>
 	);

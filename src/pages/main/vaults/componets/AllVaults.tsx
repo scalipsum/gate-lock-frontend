@@ -12,14 +12,12 @@ type AllVaultsProps = {
 };
 
 const AllVaults: FC<AllVaultsProps> = ({ data, loading, refetchVaults }) => {
-	const allVaults = data?.getAllVaults ?? [];
-
 	return (
 		<OptionalWrapper
 			data={loading}
 			elseComponent={
 				<div className="flex flex-wrap -mx-4 mt-16">
-					{allVaults.map((vault) => (
+					{data?.getAllVaults?.map((vault) => (
 						<SingleVault
 							vault={vault}
 							key={vault.id}

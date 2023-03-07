@@ -12,6 +12,7 @@ import MessagePage from './pages/auth/message/message.page';
 import UserConfirmPage from './pages/auth/userConfirm/userConfirm.page';
 import ErrorPage from './pages/main/error/error.page';
 import MainWrapper from './pages/main/main.wrapper';
+import VaultPage from './pages/main/vault/vault.page';
 import VaultsPage from './pages/main/vaults/vaults.page';
 
 const Router: FC = () => {
@@ -36,6 +37,14 @@ const Router: FC = () => {
 					element: (
 						<MainWrapper title="All Vaults">
 							<VaultsPage />
+						</MainWrapper>
+					),
+				},
+				{
+					path: '/vaults/:id',
+					element: (
+						<MainWrapper title="All Credentials">
+							<VaultPage />
 						</MainWrapper>
 					),
 				},
