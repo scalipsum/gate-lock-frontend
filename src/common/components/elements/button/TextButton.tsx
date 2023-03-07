@@ -17,17 +17,10 @@ const TextButton: FC<TextButtonProps> = ({
 	loading,
 	...props
 }) => {
-	const padding =
-		size === 'small'
-			? 'px-4 py-2'
-			: loading
-			? 'py-4 pr-10 pl-16'
-			: 'py-4 px-10';
-
 	return (
 		<div className={containerClassName}>
 			<button
-				className={`${className} ${padding} text-black text-base
+				className={`${className} text-black text-base
                 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none
                 flex items-center justify-center hover:underline font-normal tracking-normal
             `}

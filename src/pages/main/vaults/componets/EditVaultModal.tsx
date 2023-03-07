@@ -4,10 +4,14 @@ import Input from '../../../../common/components/elements/Input';
 import { useForm } from 'react-hook-form';
 import { InferType, object, string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useDeleteVaultMutation } from '../../../../generated/graphql';
+import {
+	useDeleteVaultMutation,
+	useUpdateVaultMutation,
+} from '../../../../generated/graphql';
 import { showError, showSuccess } from '../../../../common/helpers/showToast';
 import { useMainContext } from '../../main.provider';
 import { OperationContext } from 'urql';
+import TextButton from '../../../../common/components/elements/button/TextButton';
 
 const editVaultSchema = object({
 	name: string().required('Vault name is required.').max(16),
@@ -29,6 +33,7 @@ const EditVaultModal: FC<EditVaultModalProps> = ({
 	const [loading, setLoading] = useState<boolean>(false);
 
 	const [, deleteVault] = useDeleteVaultMutation();
+	const [, updateVault] = useUpdateVaultMutation();
 
 	/**
 	 * Vault Delete
@@ -48,19 +53,21 @@ const EditVaultModal: FC<EditVaultModalProps> = ({
 	};
 
 	/**
-	 * Form Submit
+	 * Update Vault - Form Submit
 	 */
 	const onVaultUpdate = async (data: CreateVaultData) => {
 		setLoading(true);
-		// console.log(data.name);
-		// const { data: createData, error: createError } = await createVault({
-		// 	input: { name: data.name },
-		// });
-		// if (createData?.createVault?.id) {
-		// 	showSuccess('Vault has been created.');
-		// 	setModal(null);
-		// }
-		// if (createError) showError(createError.message);
+		console.log(data.name);
+		console.log(id);
+		const { data: updateVaultData, error: updateVaultError } =
+			await updateVault({
+				input: { id, name: data.name },
+			});
+		if (updateVaultData?.updateVault?.id) {
+			showSuccess('Vault has been updated.');
+			setModal(null);
+		}
+		if (updateVaultError) showError(updateVaultError.message);
 		setLoading(false);
 	};
 
@@ -79,7 +86,7 @@ const EditVaultModal: FC<EditVaultModalProps> = ({
 
 	return (
 		<div>
-			<h3>Edit your {name} Vault</h3>
+			<h3>Edit "{name}" Vault</h3>
 
 			<form
 				onSubmit={handleSubmit(onVaultUpdate)}
@@ -94,18 +101,13 @@ const EditVaultModal: FC<EditVaultModalProps> = ({
 					infoText="Max 24 chars."
 					style={{ textTransform: 'capitalize' }}
 				/>
-				<div className="flex justify-between items-center mt-6">
+				<div className="flex justify-between items-end mt-8">
 					<Button type="submit" loading={loading}>
 						Update Name
 					</Button>
-					<Button
-						type="button"
-						kind="deny"
-						loading={loading}
-						onClick={onVaultDelete}
-					>
+					<TextButton type="button" onClick={onVaultDelete}>
 						Delete vault
-					</Button>
+					</TextButton>
 				</div>
 			</form>
 		</div>

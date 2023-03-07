@@ -68,7 +68,7 @@ const CreateVaultModal: FC<CreateVaultModalProps> = ({ refetchVaults }) => {
 					register={register}
 					error={errors.name?.message}
 					infoText="Max 24 chars."
-					style={{ textTransform: 'capitalize' }}
+					capitalize
 				/>
 				<Button
 					type="submit"

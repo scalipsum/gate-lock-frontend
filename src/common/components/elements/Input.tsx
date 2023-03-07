@@ -12,6 +12,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 	disabled?: boolean;
 	icon?: JSX.Element;
 	autoFocus?: boolean;
+	capitalize?: boolean;
 	// Styling
 	containerClassName?: string;
 	className?: string;
@@ -29,6 +30,7 @@ const Input: FC<InputProps> = ({
 	disabled,
 	icon,
 	autoFocus,
+	capitalize,
 	// Styling
 	className,
 	containerClassName,
@@ -92,11 +94,14 @@ const Input: FC<InputProps> = ({
 				<input
 					id={name}
 					name={name}
-					className={`py-4 ${inputPaddingLeft} pr-4 rounded-lg w-full border ${borderColor} ${textColor} placeholder:text-gray4 text-lg ${backgroundColor}`}
+					className={`py-4 ${inputPaddingLeft} pr-4 capitalize rounded-lg w-full border ${borderColor} ${textColor} placeholder:text-gray4 text-lg ${backgroundColor}`}
 					onFocus={() => setActive(true)}
 					onBlur={() => setActive(false)}
 					value={value}
-					onChange={(e) => setValue(e.target.value)}
+					onChange={(e) => {
+						const value = e.target.value;
+						setValue(value.toUpperCase());
+					}}
 					disabled={disabled}
 					autoFocus={autoFocus}
 					{...register(name)}

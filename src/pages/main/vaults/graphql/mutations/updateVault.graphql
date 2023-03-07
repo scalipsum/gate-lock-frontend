@@ -1,0 +1,6 @@
+mutation UpdateVault($input: UpdateVaultInput!) {
+	updateVault(input: $input) {
+		id
+		name
+	}
+}
