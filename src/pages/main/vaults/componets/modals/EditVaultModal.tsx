@@ -13,6 +13,7 @@ import { useMainContext } from '../../../main.provider';
 import { OperationContext } from 'urql';
 import TextButton from '../../../../../common/components/elements/button/TextButton';
 import ConfirmDeleteModal from './ConfirmDeleteModal';
+import { toUppercaseWords } from '../../../../../common/helpers/methods';
 
 const editVaultSchema = object({
 	name: string().required('Vault name is required.').max(16),
@@ -44,7 +45,7 @@ const EditVaultModal: FC<EditVaultModalProps> = ({
 		console.log(id);
 		const { data: updateVaultData, error: updateVaultError } =
 			await updateVault({
-				input: { id, name: data.name },
+				input: { id, name: toUppercaseWords(data.name) },
 			});
 		if (updateVaultData?.updateVault?.id) {
 			showSuccess('Vault has been updated.');
@@ -98,7 +99,7 @@ const EditVaultModal: FC<EditVaultModalProps> = ({
 					register={register}
 					error={errors.name?.message}
 					infoText="Max 24 chars."
-					style={{ textTransform: 'capitalize' }}
+					capitalize
 				/>
 				<div className="w-full flex justify-between mt-6">
 					<Button

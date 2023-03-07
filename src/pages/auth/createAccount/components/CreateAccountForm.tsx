@@ -8,6 +8,7 @@ import Input from '../../../../common/components/elements/Input';
 import { useUpdateUserMutation } from '../../../../generated/graphql';
 import { showError, showSuccess } from '../../../../common/helpers/showToast';
 import { useNavigate } from 'react-router-dom';
+import { toUppercaseWords } from '../../../../common/helpers/methods';
 
 const createAccountSchema = object({
 	firstName: string().required('First name is required.'),
@@ -36,8 +37,8 @@ const CreateAccountForm: FC<CreateAccountFormProps> = ({ userId }) => {
 		const { data: updateData, error: updateError } = await updateUser({
 			input: {
 				id: userId,
-				firstName: data.firstName,
-				lastName: data.lastName,
+				firstName: toUppercaseWords(data.firstName),
+				lastName: toUppercaseWords(data.lastName),
 				password: data.password,
 			},
 		});
@@ -75,6 +76,7 @@ const CreateAccountForm: FC<CreateAccountFormProps> = ({ userId }) => {
 					register={register}
 					error={errors.firstName?.message}
 					containerClassName="mr-4"
+					capitalize
 				/>
 				<Input
 					name="lastName"
@@ -83,6 +85,7 @@ const CreateAccountForm: FC<CreateAccountFormProps> = ({ userId }) => {
 					label="Last name"
 					register={register}
 					error={errors.lastName?.message}
+					capitalize
 				/>
 			</div>
 			<Input

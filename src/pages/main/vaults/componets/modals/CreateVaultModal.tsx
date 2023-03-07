@@ -11,6 +11,7 @@ import {
 } from '../../../../../common/helpers/showToast';
 import { useMainContext } from '../../../main.provider';
 import { OperationContext } from 'urql';
+import { toUppercaseWords } from '../../../../../common/helpers/methods';
 
 const createVaultSchema = object({
 	name: string().required('Vault name is required.').max(24),
@@ -32,9 +33,8 @@ const CreateVaultModal: FC<CreateVaultModalProps> = ({ refetchVaults }) => {
 	 */
 	const onSubmit = async (data: CreateVaultData) => {
 		setLoading(true);
-		console.log(data.name);
 		const { data: createData, error: createError } = await createVault({
-			input: { name: data.name },
+			input: { name: toUppercaseWords(data.name) },
 		});
 		if (createData?.createVault?.id) {
 			await refetchVaults();
