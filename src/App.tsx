@@ -10,6 +10,7 @@ const App: FC = () => {
 	const client = createClient({
 		url: process.env.REACT_APP_API_URL ?? '',
 		fetchOptions: { credentials: 'include' },
+		requestPolicy: 'cache-and-network',
 	});
 
 	return (

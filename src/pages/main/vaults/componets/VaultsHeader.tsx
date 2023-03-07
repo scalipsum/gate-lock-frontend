@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { AiOutlineCluster } from 'react-icons/ai';
+import { OperationContext } from 'urql';
 import SymbolLogo from '../../../../assets/svg/gl-logo-symbol.svg';
 import Button from '../../../../common/components/elements/button';
 import OptionalWrapper from '../../../../common/components/elements/wrapper/OptionalWrapper';
@@ -7,11 +8,14 @@ import { useMeQuery } from '../../../../generated/graphql';
 import { useMainContext } from '../../main.provider';
 import CreateVaultModal from './CreateVaultModal';
 
-export type VaultsHeaderProps = {};
+export type VaultsHeaderProps = {
+	refetchVaults: (opts?: Partial<OperationContext> | undefined) => void;
+};
 
-const VaultsHeader: FC<VaultsHeaderProps> = () => {
+const VaultsHeader: FC<VaultsHeaderProps> = ({ refetchVaults }) => {
 	const [{ data }] = useMeQuery();
 	const { setModal } = useMainContext();
+	const firstName = data?.me?.firstName;
 
 	return (
 		<div className="flex justify-between items-center mb-8 pt-8">
@@ -19,7 +23,7 @@ const VaultsHeader: FC<VaultsHeaderProps> = () => {
 			<div>
 				<img src={SymbolLogo} alt="Gate Lock Logo" className="w-36" />
 				<OptionalWrapper data={data}>
-					<p className="mt-3">Welcome back, {data?.me?.firstName}!</p>
+					<p className="mt-3">Welcome back, {firstName}!</p>
 				</OptionalWrapper>
 			</div>
 
@@ -34,7 +38,11 @@ const VaultsHeader: FC<VaultsHeaderProps> = () => {
 				<Button
 					onClick={() =>
 						setModal({
-							content: <CreateVaultModal />,
+							content: (
+								<CreateVaultModal
+									refetchVaults={refetchVaults}
+								/>
+							),
 							width: 'medium',
 						})
 					}

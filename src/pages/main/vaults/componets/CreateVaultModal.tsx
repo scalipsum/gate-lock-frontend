@@ -7,13 +7,18 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useCreateVaultMutation } from '../../../../generated/graphql';
 import { showError, showSuccess } from '../../../../common/helpers/showToast';
 import { useMainContext } from '../../main.provider';
+import { OperationContext } from 'urql';
 
 const createVaultSchema = object({
 	name: string().required('Vault name is required.').max(24),
 });
 type CreateVaultData = InferType<typeof createVaultSchema>;
 
-const CreateVaultModal: FC = () => {
+type CreateVaultModalProps = {
+	refetchVaults: (opts?: Partial<OperationContext> | undefined) => void;
+};
+
+const CreateVaultModal: FC<CreateVaultModalProps> = ({ refetchVaults }) => {
 	const { setModal } = useMainContext();
 	const [loading, setLoading] = useState<boolean>(false);
 
@@ -29,6 +34,7 @@ const CreateVaultModal: FC = () => {
 			input: { name: data.name },
 		});
 		if (createData?.createVault?.id) {
+			await refetchVaults();
 			showSuccess('Vault has been created.');
 			setModal(null);
 		}

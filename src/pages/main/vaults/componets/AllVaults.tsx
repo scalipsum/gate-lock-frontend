@@ -1,24 +1,30 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
+import { OperationContext } from 'urql';
 import Loading from '../../../../common/components/elements/Loading';
 import OptionalWrapper from '../../../../common/components/elements/wrapper/OptionalWrapper';
-import { showError } from '../../../../common/helpers/showToast';
-import { useGetAllVaultsQuery } from '../../../../generated/graphql';
+import { GetAllVaultsQuery } from '../../../../generated/graphql';
 import SingleVault from './SingleVault';
 
-const AllVaults: FC = () => {
-	const [{ data, fetching: loading, error }] = useGetAllVaultsQuery();
+type AllVaultsProps = {
+	loading: Boolean;
+	data: GetAllVaultsQuery | undefined;
+	refetchVaults: (opts?: Partial<OperationContext> | undefined) => void;
+};
 
-	useEffect(() => {
-		if (error) showError(error?.message);
-	}, [error]);
+const AllVaults: FC<AllVaultsProps> = ({ data, loading, refetchVaults }) => {
+	const allVaults = data?.getAllVaults ?? [];
 
 	return (
 		<OptionalWrapper
 			data={loading}
 			elseComponent={
 				<div className="flex flex-wrap -mx-4 mt-16">
-					{data?.getAllVaults?.map((vault) => (
-						<SingleVault vault={vault} key={vault.id} />
+					{allVaults.map((vault) => (
+						<SingleVault
+							vault={vault}
+							key={vault.id}
+							refetchVaults={refetchVaults}
+						/>
 					))}
 				</div>
 			}

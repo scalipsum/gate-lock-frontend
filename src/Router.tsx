@@ -28,12 +28,18 @@ const Router: FC = () => {
 				<></>
 			) : !isLoggedIn ? (
 				redirectAuth()
-			) : (
-				<MainWrapper title="All Vaults">
-					<VaultsPage />
-				</MainWrapper>
-			),
+			) : undefined,
 			errorElement: isLoggedIn ? <ErrorPage /> : redirectAuth(),
+			children: [
+				{
+					path: '/',
+					element: (
+						<MainWrapper title="All Vaults">
+							<VaultsPage />
+						</MainWrapper>
+					),
+				},
+			],
 		},
 		// Auth
 		{

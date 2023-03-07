@@ -7,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useDeleteVaultMutation } from '../../../../generated/graphql';
 import { showError, showSuccess } from '../../../../common/helpers/showToast';
 import { useMainContext } from '../../main.provider';
+import { OperationContext } from 'urql';
 
 const editVaultSchema = object({
 	name: string().required('Vault name is required.').max(16),
@@ -16,9 +17,14 @@ type CreateVaultData = InferType<typeof editVaultSchema>;
 type EditVaultModalProps = {
 	id: string;
 	name: string;
+	refetchVaults: (opts?: Partial<OperationContext> | undefined) => void;
 };
 
-const EditVaultModal: FC<EditVaultModalProps> = ({ id, name }) => {
+const EditVaultModal: FC<EditVaultModalProps> = ({
+	id,
+	name,
+	refetchVaults,
+}) => {
 	const { setModal } = useMainContext();
 	const [loading, setLoading] = useState<boolean>(false);
 
@@ -33,6 +39,7 @@ const EditVaultModal: FC<EditVaultModalProps> = ({ id, name }) => {
 			input: { id },
 		});
 		if (deleteData?.deleteVault) {
+			await refetchVaults();
 			showSuccess('Vault deleted.');
 			setModal(null);
 		}

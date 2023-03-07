@@ -1,6 +1,7 @@
 import React, { FC, useMemo } from 'react';
 import { AiOutlineHdd } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { OperationContext } from 'urql';
 import Button from '../../../../common/components/elements/button';
 import OptionalWrapper from '../../../../common/components/elements/wrapper/OptionalWrapper';
 import { SingleVaultFragment, useMeQuery } from '../../../../generated/graphql';
@@ -9,9 +10,10 @@ import EditVaultModal from './EditVaultModal';
 
 type SingleVaultProps = {
 	vault: SingleVaultFragment;
+	refetchVaults: (opts?: Partial<OperationContext> | undefined) => void;
 };
 
-const SingleVault: FC<SingleVaultProps> = ({ vault }) => {
+const SingleVault: FC<SingleVaultProps> = ({ vault, refetchVaults }) => {
 	const { setModal } = useMainContext();
 
 	const [{ data: meData }] = useMeQuery();
@@ -19,13 +21,8 @@ const SingleVault: FC<SingleVaultProps> = ({ vault }) => {
 	/**
 	 * Created By Text
 	 */
-	const createdBy = useMemo(
-		() =>
-			vault.createdBy.id === meData?.me?.id
-				? 'You'
-				: vault.createdBy.email,
-		[vault, meData],
-	);
+	const createdBy =
+		vault.createdBy.id === meData?.me?.id ? 'You' : vault.createdBy.email;
 
 	/**
 	 * Members Number Text
@@ -67,6 +64,7 @@ const SingleVault: FC<SingleVaultProps> = ({ vault }) => {
 										<EditVaultModal
 											id={vault.id}
 											name={vault.name}
+											refetchVaults={refetchVaults}
 										/>
 									),
 									width: 'medium',
