@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import RightSectionFooter from './RightSectionFooter';
+import RightSectionProfile from './RightSectionProfile';
 
 type RightSectionProps = {
 	className?: string;
@@ -7,8 +8,8 @@ type RightSectionProps = {
 
 const RightSection: FC<RightSectionProps> = ({ className }) => {
 	return (
-		<div className={`${className} px-4 bg-gray1 relative`}>
-			{/* <h3>Profile section</h3> */}
+		<div className={`${className} pl-6 bg-gray1 relative`}>
+			<RightSectionProfile />
 			<RightSectionFooter />
 		</div>
 	);
