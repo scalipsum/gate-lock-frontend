@@ -17,7 +17,7 @@ const MainWrapper: FC<MainWrapperProps> = ({ children, title }) => {
 			<Modal />
 			{/* Wrapper */}
 			<div className="px-6 h-screen w-full">
-				<div className="bg-white max-w-container mx-auto px-12 h-full shadow-container">
+				<div className="bg-white max-w-container mx-auto h-full">
 					{children}
 				</div>
 			</div>

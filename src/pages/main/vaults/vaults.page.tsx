@@ -14,7 +14,7 @@ const VaultsPage: FC = () => {
 	}, [error]);
 
 	return (
-		<div className="relative h-full">
+		<div className="relative h-full px-12">
 			<VaultsHeader refetchVaults={refetchVaults} />
 			<AllVaults
 				data={data}
