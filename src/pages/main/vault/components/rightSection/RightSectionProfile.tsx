@@ -13,7 +13,7 @@ const RightSectionProfile: FC<RightSectionProfileProps> = () => {
 	const name = data?.me?.name;
 
 	return (
-		<div className="pt-6 flex items-center">
+		<div className="pt-6 flex items-center mb-16">
 			{/* Avatar */}
 			<div className="bg-gray3 w-24 h-24 rounded-full flex items-center justify-center">
 				<h2 className="text-gray4" style={{ fontSize: 32 }}>
