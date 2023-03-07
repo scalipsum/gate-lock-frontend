@@ -1,0 +1,5 @@
+query GetVault($input: GetVaultInput!) {
+	getVault(input: $input) {
+		...SingleVault
+	}
+}

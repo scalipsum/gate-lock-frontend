@@ -7,7 +7,7 @@ type MiddleSectionProps = {
 const MiddleSection: FC<MiddleSectionProps> = ({ className }) => {
 	return (
 		<div className={`${className} px-4`}>
-			<h3>Credential section</h3>
+			{/* <h3>Credential section</h3> */}
 		</div>
 	);
 };
